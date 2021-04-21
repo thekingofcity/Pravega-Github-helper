@@ -6,6 +6,10 @@ This set of scripts speeds up the routine work through *initialization*, *pull r
 
 It also generate the issue branch and commit message according to the [Pravega Contributing Wiki](https://github.com/pravega/pravega/wiki/Contributing).
 
+![](./img/Intro.svg)
+
+<details>
+
 ```mermaid
 graph TD
     id1[Is this issue related to the current repository?]
@@ -22,7 +26,13 @@ graph TD
     id2 -- Closed --> id6
 ```
 
+</details>
+
 ## Initialization
+
+![](./img/Initialization.svg)
+
+<details>
 
 ```mermaid
 graph TD
@@ -42,7 +52,13 @@ graph TD
     id5 --> id6 --> id7
 ```
 
+</details>
+
 ## Pull Request
+
+![](./img/Pull_Request.svg)
+
+<details>
 
 ```mermaid
 graph TD
@@ -57,7 +73,13 @@ graph TD
     id3 --> id4 --> id5
 ```
 
-## Clean up
+</details>
+
+## Clean Up
+
+![](./img/Clean_Up.svg)
+
+<details>
 
 ```mermaid
 graph TD
@@ -73,9 +95,12 @@ graph TD
     id3 --> id4 --> id5
 ```
 
+</details>
+
 # Getting Started
 
-1. Install Python >= 3.7
-2. Install third packages via `pip install requests GitPython`
-3. Change `ISSUE_URL` and `WORKING_DIR` in `./constants.py`
-4. Run `python router.py`
+1. Clone this project
+2. Install Python >= 3.7
+3. Install third packages via `pip install requests GitPython`
+4. Change `ISSUE_URL` and `WORKING_DIR` in `./constants.py`
+5. Run `python router.py`
