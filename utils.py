@@ -21,3 +21,16 @@ def get_issue(issue_url: str) -> Dict[str, Any]:
     r = requests.get(api, headers={'Accept': 'application/vnd.github.v3+json'})
 
     return json.loads(r.text)
+
+
+def generate_branch_name(issue: dict)-> str:
+    title: str = issue['title']
+    # https://stackoverflow.com/questions/3651860/which-characters-are-illegal-within-a-branch-name
+    title = re.sub(r'~|\^|\?|\*|\[|\]|:', '', title)
+    # filter duplicate whitespace and change whitespace to hyphen
+    title = '-'.join([_ for _ in issue['title'].split(' ') if _])
+
+    number: int = issue['number']
+    branch_name = f"issue-{number}-{title}"
+
+    return branch_name

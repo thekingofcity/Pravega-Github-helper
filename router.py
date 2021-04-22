@@ -3,7 +3,7 @@ import sys
 
 from git import Repo
 
-from utils import Mbox, get_issue
+from utils import Mbox, get_issue, generate_branch_name
 from constants import ISSUE_URL, WORKING_DIR
 from startIssue import start_issue
 from finishIssue import finish_issue
@@ -12,11 +12,7 @@ from cleanupIssue import cleanup_issue
 
 def router(issue_url: str, working_dir: str = WORKING_DIR):
     issue = get_issue(issue_url)
-
-    # filter duplicate whitespace and change whitespace to hyphen
-    title = '-'.join([_ for _ in issue['title'].split(' ') if _])
-    number: int = issue['number']
-    branch_name = f"issue-{number}-{title}"
+    branch_name = generate_branch_name(issue)
 
     # make sure the working_dir is the repo that have this issue
     repo_name = re.match(r'https://github.com/(\S+)/(\S+)/issues/\d+',

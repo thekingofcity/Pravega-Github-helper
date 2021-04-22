@@ -1,6 +1,6 @@
 from git import Repo
 
-from utils import Mbox
+from utils import Mbox, generate_branch_name
 
 
 def git2master(repo: Repo) -> None:
@@ -26,9 +26,7 @@ def git2newbranch(repo: Repo, branch_name: str) -> None:
 
 
 def start_issue(issue: dict, repo: Repo) -> None:
-    title: str = issue['title']
-    number: int = issue['number']
-    branch_name = f"issue-{number}-{'-'.join(title.split(' '))}"
+    branch_name = generate_branch_name(issue)
 
     git2master(repo)
     assert repo.active_branch.name == 'master'

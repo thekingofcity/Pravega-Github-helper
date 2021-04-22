@@ -3,6 +3,8 @@ import webbrowser
 
 from git import Repo
 
+from utils import generate_branch_name
+
 
 def git_commit(repo: Repo, commit_message: str) -> None:
     repo.git.add('.')
@@ -20,9 +22,7 @@ def open_pullrequest(repo_name: str, branch_name: str) -> None:
 
 
 def finish_issue(issue: dict, repo: Repo, repo_name: re.Match):
-    title: str = issue['title']
-    number: int = issue['number']
-    branch_name = f"issue-{number}-{'-'.join(title.split(' '))}"
+    branch_name = generate_branch_name(issue)
 
     # make sure the branch corresponds to the issue
     assert repo.active_branch.name == branch_name
@@ -30,6 +30,8 @@ def finish_issue(issue: dict, repo: Repo, repo_name: re.Match):
     # make sure there is something to commit
     assert repo.is_dirty() or repo.untracked_files
 
+    title: str = issue['title']
+    number: int = issue['number']
     commit_message = f'[Issue-{number}] {title}'
 
     git_commit(repo, commit_message)
