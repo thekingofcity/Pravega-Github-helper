@@ -4,7 +4,7 @@ import sys
 from git import Repo
 
 from utils import Mbox, get_issue, generate_branch_name
-from constants import ISSUE_URL, WORKING_DIR
+from constants import ISSUE_URL, WORKING_DIR, BASE_BRANCH_NAME
 from startIssue import start_issue
 from finishIssue import finish_issue
 from cleanupIssue import cleanup_issue
@@ -31,7 +31,7 @@ def router(issue_url: str, working_dir: str = WORKING_DIR):
         if repo.active_branch.name == branch_name:
             finish_issue(issue, repo, repo_name)
         else:
-            start_issue(issue, repo)
+            start_issue(issue, repo, BASE_BRANCH_NAME)
 
 if __name__ == '__main__':
     try:
