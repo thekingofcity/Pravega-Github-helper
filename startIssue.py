@@ -26,9 +26,10 @@ def git2newbranch(repo: Repo, branch_name: str) -> None:
 
 
 def start_issue(issue: dict, repo: Repo, base_branch_name: str) -> None:
-    branch_name = generate_branch_name(issue)
-
-    git2master(repo)
+    # some cleanup before checkout to the new branch
+    git2master(repo, base_branch_name)
     assert repo.active_branch.name == base_branch_name
-    git_pull_upstream(repo)
+    git_pull_upstream(repo, base_branch_name)
+
+    branch_name = generate_branch_name(issue)
     git2newbranch(repo, branch_name)

@@ -25,7 +25,7 @@ def router(issue_url: str, working_dir: str = WORKING_DIR):
 
     # switch logic
     if issue['state'] == 'closed':
-        cleanup_issue(issue, repo)
+        cleanup_issue(issue, repo, BASE_BRANCH_NAME)
     else:
         assert issue['state'] == 'open'
         if repo.active_branch.name == branch_name:
